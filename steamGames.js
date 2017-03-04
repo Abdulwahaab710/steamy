@@ -149388,9 +149388,9 @@
 					out += "("
 					out += apps[i]['appid'];
 					out += ",\"";
-					apps[i]['name'] = apps[i]['name'].replace('"', 'GG');
+					apps[i]['name'] = apps[i]['name'].replace(/\"/g, '\\\"');
 					out += apps[i]['name'];
-					out += "\"), ";
+					out += "\"),\n";
 				}
 
 				out += ";";
