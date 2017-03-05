@@ -4,6 +4,7 @@ import './App.css';
 
 import Header from '../components/Header.js';
 import Home from './Home.js';
+import Profile from '../components/Profile.js';
 
 const Container = (props) => (
   <div className='content'>
@@ -19,6 +20,9 @@ export default class App extends Component {
         <Router history={hashHistory}>
           <Route path='/' component={Container}>
             <IndexRoute component={Home} />
+          </Route>
+          <Route path='/profile' component={Container}>
+            <IndexRoute component={Profile} />
           </Route>
         </Router>
       </div>
