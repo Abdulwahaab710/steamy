@@ -1,3 +1,6 @@
+html {
+    height: 100%;
+}
 body {
   margin: 0;
   padding: 0;
@@ -13,6 +16,7 @@ form{
 }
 h1{
     color: #7ADCF2;
+    text-align: center;
 }
 p{
     color: #FFFAFB;
@@ -38,4 +42,19 @@ button {
   border: 2px solid #FFFAFB;
   color: white;
   font-size: 1.4em;
+  padding: 0.2em 4em;
+}
+button:hover {
+  background: #616283;
+  border: 2px solid #FFFAFB;
+  color: white;
+  font-size: 1.4em;
+  padding: 0.2em 4em;
+  cursor: pointer;
+}
+div{
+    text-align: center;
+}
+.title{
+    width: 50%;
 }

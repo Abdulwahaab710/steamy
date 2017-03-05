@@ -6,7 +6,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1>Stop grinding your gears and find gamers you mesh with</h1>
+        <div class="title">
+          <h1>Stop grinding your gears and find gamers you mesh with</h1>
+        </div>
         <form>
           <p> - Step1 - </p>
           <input type="text" placeholder="Enter your username"/>
