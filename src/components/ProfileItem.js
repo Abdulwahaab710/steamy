@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Profile.css';
 
-export default class Profile extends Component {
+export default class ProfileItem extends Component {
   render() {
     return (
       <div className="profile-container">
