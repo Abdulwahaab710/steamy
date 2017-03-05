@@ -16,6 +16,15 @@ var endpointsAPI  = function(app, database, rootDir) {
           res.sendFile('index.html')
         });
 
+        app.get('/findMatches/', function(req, res) {
+            console.log(req.query);
+            if(! req.query.username) {
+                return res.status(400).send();
+            }
+
+            getSteamIDbyUserName(req.query.username, res);
+        });
+
         app.get('/userLastPlayed/', function(req, res) {
             console.log(req.query);
             if(! req.query.username) {
@@ -29,6 +38,19 @@ var endpointsAPI  = function(app, database, rootDir) {
 
             getSteamIDbyUserName(req.query.username, res);
         });
+
+        function findMatches(user, potentialMatches) {
+            /*1. Find # of mathcing games between user and potential match
+            2. Count matcing hours vs total hours for both user & potential match
+            3. Get percent of matchingHours/totalHours for the two people being compared
+            4. Give percentage base on similarity
+            5. Loop and upload the top 5.
+
+            for (let i = 0; i < potentialMatches.length; i++) {
+                for (let j = 0; j < )
+            }
+        */
+        }
 
 
         function getSteamIDbyUserName(steamUserName, res) {
