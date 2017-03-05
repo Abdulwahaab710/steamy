@@ -2,4 +2,40 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: #2E294E;
+}
+form{
+    text-align: center;
+}
+h1{
+    color: #7ADCF2;
+}
+p{
+    color: #FFFAFB;
+}
+input[type="text"]{
+    background: #616283;
+    border: 2px solid #FFFAFB;
+    font-size: 1.4em;
+    text-align: center;
+    padding: 0.3em;
+    width: 13em;
+}
+input[type="text"]::-webkit-input-placeholder{
+    color: black;
+    background: #616283;
+    font-size: 1.1em;
+    text-align: center;
+    padding: 0.3em;
+    width: 13em;
+}
+button {
+  background: #2E294E;
+  border: 2px solid #FFFAFB;
+  color: white;
+  font-size: 1.4em;
 }
