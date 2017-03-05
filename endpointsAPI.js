@@ -6,15 +6,15 @@ var endpointsAPI  = function(app, database, rootDir) {
 
     var fs = require('fs'), ini = require('ini');
 
-    var config = ini.parse(fs.readFileSync('./Config/config.ini', 'utf-8'));
+    var config = ini.parse(fs.readFileSync('./config/config.ini', 'utf-8'));
 
 
 
     self.activateEndpoints = function() {
-             
+
         app.get('/', function (req, res) {
           res.sendFile('index.html')
-        });   
+        });
 
         app.get('/userLastPlayed/', function(req, res) {
             console.log(req.query);
@@ -25,7 +25,7 @@ var endpointsAPI  = function(app, database, rootDir) {
             getSteamIDbyUserName(req.params.steamUserName, function(err, info) {
                 //callback hell?
             });
-            */   
+            */
 
             getSteamIDbyUserName(req.query.username, res);
         });
@@ -124,7 +124,7 @@ var endpointsAPI  = function(app, database, rootDir) {
 
 
         //consider putting these helper functions into a module.
-        
+
         function registerUser(res, req) {
             var username = req.body.username;
             var password = req.body.password;
@@ -136,11 +136,11 @@ var endpointsAPI  = function(app, database, rootDir) {
                     //in practice, a database call with all pertinent user info would be used here instead.
 
                     getNewUserInfo(username, req, res, serializeNewUser);
-                } 
-            });  
+                }
+            });
         }
 
-        
+
         function getNewUserInfo(username, req, res, callback) {
             database.fetchFirst("SELECT * FROM User WHERE User.Username = ?", [username], function (userRecord) {
                 return callback(userRecord, req, res);
@@ -163,5 +163,5 @@ var endpointsAPI  = function(app, database, rootDir) {
     };
 };
 
-//allow this entire file  to be exported to application.js 
+//allow this entire file  to be exported to application.js
 module.exports = endpointsAPI;

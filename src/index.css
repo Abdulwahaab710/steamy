@@ -1,60 +1,21 @@
-html {
-    height: 100%;
-}
+@import url('https://fonts.googleapis.com/css?family=Righteous|Roboto+Slab|Rubik');
+
 body {
+  background: #2E294E;
+  padding: 100px 0 0 0;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  background: #2E294E;
 }
-form{
-    text-align: center;
+
+h1 {
+  font-family: 'Roboto Slab', serif;
+  color: #7ADCF2;
 }
-h1{
-    color: #7ADCF2;
-    text-align: center;
-}
-p{
-    color: #FFFAFB;
-}
-input[type="text"]{
-    background: #616283;
-    border: 2px solid #FFFAFB;
-    font-size: 1.4em;
-    text-align: center;
-    padding: 0.3em;
-    width: 13em;
-}
-input[type="text"]::-webkit-input-placeholder{
-    color: black;
-    background: #616283;
-    font-size: 1.1em;
-    text-align: center;
-    padding: 0.3em;
-    width: 13em;
-}
-button {
-  background: #2E294E;
-  border: 2px solid #FFFAFB;
-  color: white;
-  font-size: 1.4em;
-  padding: 0.2em 4em;
-}
-button:hover {
-  background: #616283;
-  border: 2px solid #FFFAFB;
-  color: white;
-  font-size: 1.4em;
-  padding: 0.2em 4em;
-  cursor: pointer;
-}
-div{
-    text-align: center;
-}
-.title{
-    width: 50%;
+
+.centered {
+  text-align: center;
 }

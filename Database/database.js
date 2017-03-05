@@ -7,15 +7,15 @@ var databaseModule = function(mysql) {
     var fs = require('fs'), ini = require('ini');
 
     //parse our databse configuration file.
-    var config = ini.parse(fs.readFileSync('./Config/config.ini', 'utf-8'));
-    
+    var config = ini.parse(fs.readFileSync('./config/config.ini', 'utf-8'));
+
     //config object for the database.
     var connection = mysql.createConnection({
         host: config.database.host,
         database: config.database.database,
         user: config.database.user,
         password: config.database.password,
-    });  
+    });
 
     /**
      * [Acquires a connection to the database.]
@@ -30,7 +30,7 @@ var databaseModule = function(mysql) {
                 //'connection' object is now active.
                 console.log("Connected to the database.");
             }
-        });    
+        });
     };
 
 

@@ -1,0 +1,23 @@
+header {
+  background-color: #FFF;
+  height: 80px;
+  width: 100%;
+  top: 0;
+  position: fixed;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.header-logo {
+  padding-left: 16px;
+  width: 80px;
+  color: #131515;
+}
+
+.header-title {
+  padding-left: 16px;
+  font-family: 'Righteous', cursive;
+  font-size: 28pt;
+  color: #131515;
+}
