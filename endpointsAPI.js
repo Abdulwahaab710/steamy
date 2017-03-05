@@ -13,12 +13,12 @@ var endpointsAPI  = function(app, database, rootDir) {
     self.activateEndpoints = function() {
              
         app.get('/', function (req, res) {
-            res.sendFile(rootDir + '/Public/index.html');
+          res.sendFile('index.html')
         });   
 
-        app.get('/userLastPlayed/:username', function(req, res) {
-            console.log(req.params);
-            if(! req.params.username) {
+        app.get('/userLastPlayed/', function(req, res) {
+            console.log(req.query);
+            if(! req.query.username) {
                 return res.status(400).send();
             }
             /*
@@ -27,7 +27,7 @@ var endpointsAPI  = function(app, database, rootDir) {
             });
             */   
 
-            getSteamIDbyUserName(req.params.username, res);        
+            getSteamIDbyUserName(req.query.username, res);
         });
 
 

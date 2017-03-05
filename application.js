@@ -11,7 +11,7 @@ var bodyParser = require('body-parser');
 console.log("\nInitializing application...\n");
 //register our app as an express application
 var app = express();
-
+app.use(express.static(__dirname + '/views'));
 //set the root directory of the project, required for res.sendFile.
 app.use('/', express.static(__dirname + '/'));
 
