@@ -12,6 +12,7 @@ console.log("\nInitializing application...\n");
 //register our app as an express application
 var app = express();
 app.use(express.static(__dirname + '/views'));
+app.use('/src', express.static(__dirname + '/scr'));
 //set the root directory of the project, required for res.sendFile.
 app.use('/', express.static(__dirname + '/'));
 

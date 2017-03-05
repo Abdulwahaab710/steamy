@@ -1,7 +1,16 @@
-const element = <h1>Hello World</h1>
-const element = <h1>Execute expressions! {2+2}</h1>
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-// Under the hood without JSX
-// React.createElement(type, [props], [...children])
-const element = React.createElement('h1', null, `Hello World`)
-const element = React.createElement('h1', null, `Execute expressions! ${2+2}`)
+class App extends React.Component {
+  render() {
+    return (
+      <form action="http://localhost:3000/userLastPlayed/">
+        <input id="username" type="text" name="username"/>
+        <button type="submit">GO</button>
+      </form>
+    );
+  }
+}
+
+const app = document.getElementById('app')
+ReactDOM.render(<Form />, document.getElementById('app'));
