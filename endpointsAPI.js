@@ -4,6 +4,11 @@ var endpointsAPI  = function(app, database, rootDir) {
 
     var request=require('request');
 
+    var fs = require('fs'), ini = require('ini');
+
+    var config = ini.parse(fs.readFileSync('./Config/config.ini', 'utf-8'));
+
+
 
     self.activateEndpoints = function() {
              
@@ -27,7 +32,7 @@ var endpointsAPI  = function(app, database, rootDir) {
 
 
         function getSteamIDbyUserName(steamUserName, res) {
-            request.get('http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=E3FE0656FDE35ACAE60198177A24CD49&vanityurl=' + steamUserName, function(err, innerRes, body){
+            request.get('http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=' + config.steamAPI.key + '&vanityurl=' + steamUserName, function(err, innerRes, body){
                 if(err) {
                     console.log("err!");
                     return res.status(400).send();
@@ -49,35 +54,72 @@ var endpointsAPI  = function(app, database, rootDir) {
 
 
         function getAllGames(steamID, res) {
-            //http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=E3FE0656FDE35ACAE60198177A24CD49&steamid=
+            //important endpoints
 
-            //
+            //http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=' + config.steamAPI.key + '&steamid=
 
-            //http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=E3FE0656FDE35ACAE60198177A24CD49&steamid=
-            request.get('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=E3FE0656FDE35ACAE60198177A24CD49&steamids=' + steamID + '&format=json', function(err, innerRes, body){
+            //http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=' + config.steamAPI.key + '&steamid=
+
+            //http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' + config.steamAPI.key + '&steamids=
+
+
+
+            request.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=' + config.steamAPI.key + '&steamid=' + steamID + '&format=json', function(err, innerRes, body){
                 if(err) {
                     console.log("err!");
                     return res.status(400).send();
                 }
                 if(innerRes.statusCode !== 200 ) {
-                   console.log("status not 200!");
-                    return innerRes.status(503).send();
+                   console.log("service not available!");
+                    return res.status(503).send();
                 }
 
-                console.log(body);
-
-                console.log(typeof(body));
                 body = JSON.parse(body);
-                console.log(body);
+                var userGames = body.response.games;
 
-                return res.status(200).send(body);
+                userGames.sort(function(a, b) {
+                    return parseInt(a.appid) - parseInt(b.appid);
+                });
+
+                fetchUserGames(res, userGames);
             });
         }
 
+        //will take in the user's list of games and times and match them with the game's name.
+        //return HTTP 200 to client
+        function fetchUserGames(res, userGames) {
+            var sql = formatGameNameSQL(userGames);
 
-        http://store.steampowered.com/api/appdetails?appids=252950
+            database.fetchAll(sql, extractGameIDs(userGames), function(data) {
+                for(var i = 0; i < data.length; i++) {
+                    data[i].time = userGames[i].playtime_forever;
+                }
+                return res.status(200).send(data);
+            });
+        }
 
+        //formatting for SQL statement, to prevent injection
+        function formatGameNameSQL(userGames) {
+            var sql = "SELECT * FROM Games WHERE SteamID = ?";
 
+            for(var i = 0; i < userGames.length; i++) {
+                //make sure not last iteration
+                if(i != userGames.length - 1) {
+                    sql += " OR SteamID = ?";
+                }
+            }
+            return sql;
+        }
+
+        //helper function for SQL formatting function
+        function extractGameIDs(userGames) {
+            var gameIDs = [];
+            for(var i = 0; i < userGames.length; i++) {
+                gameIDs.push(userGames[i].appid);
+            }
+            console.log("gameIDs: ", gameIDs);
+            return gameIDs;
+        }
 
 
 
