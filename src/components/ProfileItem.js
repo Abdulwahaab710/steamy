@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Profile.css';
+import './ProfileItem.css';
 
 export default class ProfileItem extends Component {
   render() {
